@@ -60,7 +60,9 @@ public interface Sleep {
     }
 
     static void trigger(Process s) {
-        s.success.invoke(s.payload);
+        try {
+            s.success.invoke(s.payload);
+        } catch (Throwable t) {}
     }
 
     static void schedule(Process s) {
