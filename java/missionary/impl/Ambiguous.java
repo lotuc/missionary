@@ -395,9 +395,8 @@ public interface Ambiguous {
                 }
                 break;
             } else if (Numbers.isPos(par)) {
-                c.busy = false;
                 cb = branch(c);
-                break;
+                if (c.busy = !c.busy) {} else break;
             } else if (Numbers.isNeg(par)) if (c == b.choice) if (curr == null) {
                 c.busy = false;
                 cb = choose(c);
