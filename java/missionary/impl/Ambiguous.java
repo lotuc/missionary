@@ -163,7 +163,8 @@ public interface Ambiguous {
             ((IFn) c.iterator).invoke();
             Choice t = b.choice;
             if (t == null) break;
-            do c = c.next; while (c.prev == null);
+            Choice c0 = c;
+            do c = c.next; while (c.prev == null && c != c0);
             if (c == t.next) {
                 Object curr = b.current;
                 if (curr instanceof Processor) {
@@ -180,6 +181,7 @@ public interface Ambiguous {
                 } else if (curr instanceof Branch) walk(((Branch) curr).next);
                 break;
             }
+            if (c == c0) break;
         }
     }
 
@@ -190,7 +192,9 @@ public interface Ambiguous {
             Branch t = node instanceof Processor ? ((Processor) node).child :
                     node instanceof Branch ? (Branch) ((Branch) node).current : ((Process) node).child;
             if (t == null) break;
-            do b = b.next; while (b.prev == null);
+            Branch b0 = b;
+            do b = b.next; while (b.prev == null && b != b0);
+            if (b == b0) break;
             if (b == t.next) break;
         }
     }
