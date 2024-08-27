@@ -172,7 +172,9 @@ public interface Ambiguous {
                         walk(pr.child.next);
                         curr = b.current;
                         if (curr == null) break;
-                        do pr = pr.next; while (pr.prev == null);
+                        Processor pr0 = pr;
+                        do pr = pr.next; while (pr.prev == null && pr != pr0);
+                        if (pr == pr0) break;
                         if (pr == ((Processor) curr).next) break;
                     }
                 } else if (curr instanceof Branch) walk(((Branch) curr).next);
